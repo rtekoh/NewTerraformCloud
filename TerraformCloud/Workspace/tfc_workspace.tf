@@ -20,7 +20,7 @@ resource "tfe_workspace" "workspace" {
   auto_apply        = false
   working_directory = each.value.working_dir
   vcs_repo {
-    branch     = "main"
+    branch     = "master"
     identifier = each.value.vcs_identifier
     # oauth_token_id = each.value.oauth_token_id
     oauth_token_id = var.vcs_oauth_token
