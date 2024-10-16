@@ -4,7 +4,7 @@ terraform {
     hostname     = "app.terraform.io"
     organization = "EffulgenceTech"
     workspaces {
-      name = "project_onboarding_ws"
+      name = "NewTerraformCloud"
     }
   }
 }
