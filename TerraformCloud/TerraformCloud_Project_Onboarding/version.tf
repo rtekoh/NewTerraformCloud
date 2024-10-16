@@ -1,8 +1,8 @@
 # Using a single workspace:
 terraform {
   backend "remote" {
-    hostname = "app.terraform.io"
-    organization = "FHCC"
+    hostname     = "app.terraform.io"
+    organization = "EffulgenceTech"
     workspaces {
       name = "project_onboarding_ws"
     }
@@ -18,7 +18,7 @@ terraform {
   required_providers {
     tfe = {
       source  = "hashicorp/tfe"
-      version = "~> 0.53.0"
+      version = "~> 0.59.0"
     }
   }
 }
