@@ -21,7 +21,7 @@ workspaces = [
   {
     workspace_name = "workspace-test"
     working_dir    = "projects/prod"
-    vcs_identifier = "rtekoh/NewTerraformCloud" # Enter here the repository for your project e.g: "cloud-engineering/terraformcloud"
+    vcs_identifier = "rtekoh/Terraform-gmailaccount" # Enter here the repository for your project e.g: "cloud-engineering/terraformcloud"
     aws_account_id = "082996641203"
   }
   # Add New workspace here
