@@ -1,0 +1,82 @@
+{
+    "projects": [
+      {
+        "name": "Project1",
+        "description": "A project containing multiple workspaces for App1",
+        "workspaces": [
+          {
+            "name": "app1-config",
+            "description": "Staging workspace for App1",
+            "terraform_version": "1.6.6",
+            "tag_names": ["app1", "staging"]
+          }
+        ],
+        "teams": [
+          {
+            "name": "Project1-owner",
+            "role": "admin",
+            "access": "custom",
+            "project_access": {
+                "settings" : "read",
+                "teams"    : "manage"
+            },
+            "workspace_access": {
+                "runs": "apply",
+                "sentinel-mocks": "read",   
+                "state-versions": "read-outputs",                            
+                "variables": "write",
+                "create"     : true,
+                "workspace-locking": true,
+                "delete"   : true,
+                "move"     : false,              
+                "run-tasks": true
+              },
+            "members": ["bob@example.com"]
+          },
+          {
+            "name": "Project1-developers",
+            "role": "write",
+            "access": "custom",
+            "project_access": {
+                "settings" : "read",
+                "teams"    : "read"
+            },
+            "workspace_access": {
+                "runs": "apply",
+                "sentinel-mocks": "read",
+                "state-versions": "write",                              
+                "variables": "write",
+                "create"     : true,
+                "workspace-locking": true,
+                "delete"   : true,
+                "move"     : false,                             
+                "run-tasks": true
+              },
+            "members": ["sally@example.com", "cho@example.com"]
+          },
+          {
+            "name": "Project1-readonly",
+            "role": "read",
+            "access": "custom",
+            "project_access": {
+                "settings" : "read",
+                "teams"    : "read"
+            },
+            "workspace_access": {
+                "runs": "read",
+                "sentinel-mocks": "read",
+                "state-versions": "read-outputs",                
+                "variables": "read",
+                "create"     : false,
+                "workspace-locking": false,
+                "delete"   : false,
+                "move"     : false,
+                "run-tasks": false
+              },
+            "members": ["pat@example.com"]
+          }
+        ]
+      }
+      
+    ]
+  }
