@@ -39,73 +39,7 @@ projects = [
         }
       }
     ]
-  }
-  # ,
-
-  # {
-  #   name = "itcustomapps_project",
-  #   workspaces = [
-  #     {
-  #       name        = "itcustomapps_project_config_ws",
-  #       description = "Config workspace for itcustomapps team",
-  #       # terraform_version = "1.6.6",
-  #       tag_names = ["itcustomapps", "prod"]
-  #     }
-  #   ],
-  #   teams = [
-  #     {
-  #       name       = "tfc_itcustomapps_admin"
-  #       visibility = "secret"
-  #       access     = "custom"
-  #       members = [
-  #         "timi@effulgencetech.org"
-
-  #         # Add New members here. Use user's effulgencetech email address only 
-  #       ] # Make sure user has been granted sso access to terraform cloud and have not logged in initially. Invite will be sent directly from terraform cloud 
-
-  #       project_access = {
-  #         settings = "delete"
-  #         teams    = "manage"
-  #       }
-  #       workspace_access = {
-  #         runs           = "apply"
-  #         sentinel_mocks = "read"
-  #         state_versions = "write"
-  #         variables      = "write"
-  #         create         = true
-  #         locking        = true
-  #         delete         = true
-  #         move           = true
-  #         run_tasks      = true
-  #       }
-  #     },
-  #     {
-  #       name       = "tfc_itcustomapps_developer"
-  #       visibility = "secret"
-  #       access     = "custom"
-  #       members = [
-  #         "timi@effulgencetech.org"
-  #         # Add New members here. Use user's effulgencetech email address only 
-  #       ] # Make sure user has been granted sso access to terraform cloud and have not logged in initially. Invite will be sent directly from terraform cloud 
-  #       project_access = {
-  #         settings = "update"
-  #         teams    = "read"
-  #       }
-  #       workspace_access = {
-  #         runs           = "apply"
-  #         sentinel_mocks = "read"
-  #         state_versions = "write"
-  #         variables      = "write"
-  #         create         = true
-  #         locking        = true
-  #         delete         = true
-  #         move           = false
-  #         run_tasks      = true
-  #       }
-  #     }
-  #   ]
-  # }
-  #,
+  },
   # {
   #   name = "dba_project",
   #   workspaces = [
