@@ -1,0 +1,119 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS CloudFormation Template to create supporting IAM roles for teams for terraform cloud deployment.
+
+Parameters:
+  OIDCProviderName:
+    Type: String
+    Default: "app.terraform.io"
+    Description: "The name of the OIDC provider"
+    
+Resources:
+  TfcHaloAdminRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: terraformcloud_halo_admin_Role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Sub "arn:aws:iam::${AWS::AccountId}:oidc-provider/${OIDCProviderName}"
+            Action: 'sts:AssumeRoleWithWebIdentity'
+            Condition:
+              StringEquals:
+                "app.terraform.io:aud": "aws.workload.identity"
+              StringLike:
+                "app.terraform.io:sub": "organization:FHCC:project:halo_project:workspace:*:run_phase:*"
+      # ManagedPolicyArns: 
+      #   - 'arn:aws:iam::aws:policy/PowerUserAccess'
+      Policies:
+        - PolicyName: "HaloAdminInlinePolicy"
+          PolicyDocument: 
+            Version: "2012-10-17"
+            Statement: 
+              - Sid: "IAMPolicy"
+                Effect: "Allow"
+                Action: 
+                  - "iam:GetPolicyVersion"
+                  - "iam:ListRoleTags"
+                  - "iam:ListInstanceProfileTags"
+                  - "iam:ListInstanceProfilesForRole"
+                  - "iam:ListAttachedRolePolicies"
+                  - "iam:ListPolicyTags"
+                  - "iam:ListRolePolicies"
+                  - "iam:GetRole"
+                  - "iam:GetInstanceProfile"
+                  - "iam:GetPolicy"
+                  - "iam:ListEntitiesForPolicy"
+                  - "iam:ListPolicyVersions"
+                  - "iam:GetRolePolicy"
+                Resource: 
+                  - "*"
+              - Sid: "IAMPolicy2"
+                Effect: "Allow"
+                Action: 
+                  - "iam:ListPolicies"
+                  - "iam:ListRoles"
+                  - "iam:ListInstanceProfiles"
+                  - "iam:CreateServiceLinkedRole"
+                Resource: 
+                  - "*"
+              - Sid: "AWSServices"
+                Effect: "Allow"
+                Action: 
+                  - "autoscaling:*"
+                  - "cloudwatch:*"
+                  - "logs:*"
+                  - "ec2:*"
+                  - "elasticloadbalancing:*"
+                  - "lambda:*"
+                  - "rds:*"
+                  - "route53:*"
+                  - "s3:*"
+                  - "sts:*"
+                  - "sns:*"
+                  - "sqs:*"
+                  - "ssm:*"
+                  - "acm:*"
+                  - "backup:*"
+                  - "storagegateway:*"
+                  - "appstream:*"
+                  - "events:*"
+                  - "ec2-instance-connect:*"
+                  - "access-analyzer:*"
+                  - "backup-storage:*"
+                  - "ds:*"
+                  - "fsx:*"
+                  - "kms:ReEncrypt*"
+                  - "kms:GenerateDataKey*"
+                  - "kms:Encrypt"
+                  - "kms:DescribeKey"
+                  - "kms:Decrypt"
+                  - "kms:ListKeys"
+                  - "cloudformation:*"
+                Resource: 
+                  - "*"
+              - Sid: "SecretsManagerList"
+                Effect: "Allow"
+                Action: 
+                  - "secretsmanager:UntagResource"
+                  - "secretsmanager:DescribeSecret"
+                  - "secretsmanager:DeleteResourcePolicy"
+                  - "secretsmanager:PutSecretValue"
+                  - "secretsmanager:CreateSecret"
+                  - "secretsmanager:DeleteSecret"
+                  - "secretsmanager:CancelRotateSecret"
+                  - "secretsmanager:ListSecretVersionIds"
+                  - "secretsmanager:UpdateSecret"
+                  - "secretsmanager:GetResourcePolicy"
+                  - "secretsmanager:GetSecretValue"
+                  - "secretsmanager:RestoreSecret"
+                  - "secretsmanager:RotateSecret"
+                  - "secretsmanager:UpdateSecretVersionStage"
+                  - "secretsmanager:ValidateResourcePolicy"
+                  - "secretsmanager:TagResource"
+                  - "secretsmanager:ListSecrets"
+                  - "secretsmanager:GetRandomPassword"
+                Resource: 
+                  - "*"
+      Path: "/"

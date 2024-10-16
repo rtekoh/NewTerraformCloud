@@ -1,0 +1,18 @@
+[
+  {
+    "ParameterKey": "TfcHostname",
+    "ParameterValue": "app.terraform.io"
+  },
+  {
+    "ParameterKey": "TfcAwsAudience",
+    "ParameterValue": "aws.workload.identity"
+  },
+  {
+    "ParameterKey": "Thumbprint",
+    "ParameterValue": "FD8823AEFB961328A134706DC8575A170F0BB37C"
+  },
+  {
+    "ParameterKey": "TfcOrganizationName",
+    "ParameterValue": "FHCC"
+  }
+]

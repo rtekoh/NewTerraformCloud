@@ -1,0 +1,109 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create IAM OIDC provider, IAM role with trust policy, IAM policy, and attach policy to the role.
+
+Parameters:
+  TfcHostname:
+    Type: String
+    Description: Terraform Cloud hostname.
+    Default: 'app.terraform.io'
+  TfcAwsAudience:
+    Type: String
+    Description: Client ID for the OIDC provider.
+    Default: 'aws.workload.identity'
+  Thumbprint:
+    Type: String
+    Description: SHA1 fingerprint of the TLS certificate.
+    Default: 'FD8823AEFB961328A134706DC8575A170F0BB37C'
+  TfcOrganizationName:
+    Type: String
+    Description: The organization name for the IAM role trust policy.
+    Default: 'FHCC'
+
+Resources:
+  TfcProvider:
+    Type: 'AWS::IAM::OIDCProvider'
+    Properties:
+      Url: !Sub "https://${TfcHostname}"
+      ClientIdList: 
+        - !Ref TfcAwsAudience
+      ThumbprintList: 
+        - !Ref Thumbprint
+
+  TfcAdminRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: terraformcloud_admin_role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !GetAtt TfcProvider.Arn
+            Action: 'sts:AssumeRoleWithWebIdentity'
+            Condition:
+              StringEquals:
+                "app.terraform.io:aud": !Ref TfcAwsAudience
+              StringLike:
+                "app.terraform.io:sub": !Sub "organization:${TfcOrganizationName}:project:cloudengineering_project:workspace:*:run_phase:*"
+      ManagedPolicyArns: 
+        - 'arn:aws:iam::aws:policy/AdministratorAccess'
+
+  TfcSecurityAdminRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: terraformcloud_security_admin_Role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !GetAtt TfcProvider.Arn
+            Action: 'sts:AssumeRoleWithWebIdentity'
+            Condition:
+              StringEquals:
+                "app.terraform.io:aud": !Ref TfcAwsAudience
+              StringLike:
+                "app.terraform.io:sub": !Sub "organization:${TfcOrganizationName}:project:security_audit_project:workspace:*:run_phase:*"
+      ManagedPolicyArns: 
+        - 'arn:aws:iam::aws:policy/PowerUserAccess'
+        - 'arn:aws:iam::aws:policy/SecurityAudit'
+
+  TfcDBAAdminRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: terraformcloud_rds_admin_Role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !GetAtt TfcProvider.Arn
+            Action: 'sts:AssumeRoleWithWebIdentity'
+            Condition:
+              StringEquals:
+                "app.terraform.io:aud": !Ref TfcAwsAudience
+              StringLike:
+                "app.terraform.io:sub": !Sub "organization:${TfcOrganizationName}:project:dba_project:workspace:*:run_phase:*"
+      ManagedPolicyArns: 
+        - 'arn:aws:iam::aws:policy/job-function/DatabaseAdministrator'
+        - 'arn:aws:iam::aws:policy/CloudWatchFullAccessV2'
+
+  TfcProserveRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: terraformcloud_proserve_role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !GetAtt TfcProvider.Arn
+            Action: 'sts:AssumeRoleWithWebIdentity'
+            Condition:
+              StringEquals:
+                "app.terraform.io:aud": !Ref TfcAwsAudience
+              StringLike:
+                "app.terraform.io:sub": !Sub "organization:${TfcOrganizationName}:project:central_network_project:workspace:*:run_phase:*"
+      ManagedPolicyArns: 
+        - 'arn:aws:iam::aws:policy/PowerUserAccess'

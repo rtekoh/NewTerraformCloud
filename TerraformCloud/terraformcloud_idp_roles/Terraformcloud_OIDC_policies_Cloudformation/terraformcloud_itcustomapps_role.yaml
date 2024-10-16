@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS CloudFormation Template to create supporting IAM roles for teams for terraform cloud deployment.
+
+Parameters:
+  OIDCProviderName:
+    Type: String
+    Default: "app.terraform.io"
+    Description: "The name of the OIDC provider"
+    
+Resources:
+  TfcITcustomAppsAdminRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: terraformcloud_itcustomapps_admin_Role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Sub "arn:aws:iam::${AWS::AccountId}:oidc-provider/${OIDCProviderName}"
+            Action: 'sts:AssumeRoleWithWebIdentity'
+            Condition:
+              StringEquals:
+                "app.terraform.io:aud": "aws.workload.identity"
+              StringLike:
+                "app.terraform.io:sub": "organization:FHCC:project:itcustomapps_project:workspace:*:run_phase:*"
+      ManagedPolicyArns: 
+        - 'arn:aws:iam::aws:policy/PowerUserAccess'
