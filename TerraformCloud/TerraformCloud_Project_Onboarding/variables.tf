@@ -13,6 +13,10 @@ variable "create_new_organization" {
   type        = bool
 }
 
+variable "vcs_oauth_token" {
+  description = "VCS repository OAuth token"
+}
+
 variable "projects" {
   description = "List of projects with their details, including associated teams and team members."
   type = list(object({
@@ -21,6 +25,11 @@ variable "projects" {
       name              = string
       description       = string
       tag_names         = list(string)
+      trigger_patterns  = list(string)
+      working_directory = string
+      branch            = string
+      identifier        = string
+
     }))
     teams = list(object({
       name       = string
