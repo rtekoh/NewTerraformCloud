@@ -29,11 +29,15 @@ locals {
     for project in var.projects : [
       for ws in project.workspaces : {
         # project_name       = project.name
-        workspace_name    = ws.name
-        description       = ws.description
+        workspace_name = ws.name
+        description    = ws.description
         # terraform_version = ws.terraform_version
         tag_names         = ws.tag_names
         project_id        = lookup(local.project_name, project.name, "")
+        branch            = ws.branch
+        identifier        = ws.identifier
+        working_directory = ws.working_directory
+        trigger_patterns  = ws.trigger_patterns
       }
     ]
   ])
@@ -110,19 +114,35 @@ resource "tfe_team_project_access" "team_access" {
   }
 }
 
+# resource "tfe_oauth_client" "effulgencetech_github" {
+#   organization     = var.organization
+#   api_url          = "https://api.github.com"
+#   http_url         = "https://github.com"
+#   oauth_token      = var.vcs_oauth_token
+#   service_provider = "github"
+# }
+
 resource "tfe_workspace" "workspace" {
   for_each = { for ws in local.flattened_workspaces : ws.workspace_name => ws }
 
-  name              = each.value.workspace_name
-  organization      = var.organization # Make sure to define this variable or hardcode your organization name
+  name         = each.value.workspace_name
+  organization = var.organization # Make sure to define this variable or hardcode your organization name
   # terraform_version = each.value.terraform_version
   project_id        = each.value.project_id
   description       = each.value.description
   tag_names         = each.value.tag_names
   auto_apply        = false
   force_delete      = true
-}
+  queue_all_runs    = true
+  trigger_patterns  = each.value.trigger_patterns
+  working_directory = each.value.working_directory
+  vcs_repo {
+    branch         = each.value.branch
+    identifier     = each.value.identifier
+    oauth_token_id = var.vcs_oauth_token
+  }
 
+}
 
 # Only use the below two resources when the members are not already part of the organization
 
@@ -135,7 +155,7 @@ resource "tfe_team_organization_member" "team_members" {
 
 # # Add TFC accounts to the organization
 resource "tfe_organization_membership" "org_members" {
-   for_each = toset(flatten([
+  for_each = toset(flatten([
     for item in local.flattened_projects : [
       for member in item.team_members : "${member}"
     ]
