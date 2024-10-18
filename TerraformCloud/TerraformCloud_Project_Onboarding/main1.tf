@@ -114,13 +114,13 @@ resource "tfe_team_project_access" "team_access" {
   }
 }
 
-resource "tfe_oauth_client" "effulgencetech_github" {
-  organization     = var.organization
-  api_url          = "https://api.github.com"
-  http_url         = "https://github.com"
-  oauth_token      = var.vcs_oauth_token
-  service_provider = "github"
-}
+# resource "tfe_oauth_client" "effulgencetech_github" {
+#   organization     = var.organization
+#   api_url          = "https://api.github.com"
+#   http_url         = "https://github.com"
+#   oauth_token      = var.vcs_oauth_token
+#   service_provider = "github"
+# }
 
 resource "tfe_workspace" "workspace" {
   for_each = { for ws in local.flattened_workspaces : ws.workspace_name => ws }
