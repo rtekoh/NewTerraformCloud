@@ -5,18 +5,18 @@ vcs_oauth_token         = "ot-a6qNZLM7exPnyyjb"
 projects = [
   {
     name = "cloudengineering_project",
-    workspaces = [
-      {
-        name        = "cloudengineering_project_config_ws",
-        description = "Config workspace for CloudEngineering team",
-        # terraform_version = "1.6.6",
-        tag_names         = ["cloudengineering", "prod"]
-        trigger_patterns  = ["TerraformCloud/Workspace"]
-        working_directory = "TerraformCloud/Workspace"
-        branch            = "master"
-        identifier        = "rtekoh/NewTerraformCloud"
-      }
-    ],
+    # workspaces = [
+    #   {
+    #     name        = "cloudengineering_project_config_ws",
+    #     description = "Config workspace for CloudEngineering team",
+    #     # terraform_version = "1.6.6",
+    #     tag_names         = ["cloudengineering", "prod"]
+    #     trigger_patterns  = ["TerraformCloud/Workspace"]
+    #     working_directory = "TerraformCloud/Workspace"
+    #     branch            = "master"
+    #     identifier        = "rtekoh/NewTerraformCloud"
+    #   }
+    # ],
     teams = [
       {
         name       = "tfc_cloud_admin"
@@ -48,18 +48,18 @@ projects = [
 
   {
     name = "itcustomapps_project",
-    workspaces = [
-      {
-        name        = "itcustomapps_project_config_ws",
-        description = "Config workspace for itcustomapps team",
-        # terraform_version = "1.6.6",
-        tag_names         = ["itcustomapps", "prod"]
-        trigger_patterns  = ["TerraformCloud/Workspace"]
-        working_directory = "TerraformCloud/Workspace"
-        branch            = "master"
-        identifier        = "rtekoh/NewTerraformCloud"
-      }
-    ],
+    # workspaces = [
+    #   {
+    #     name        = "itcustomapps_project_config_ws",
+    #     description = "Config workspace for itcustomapps team",
+    #     # terraform_version = "1.6.6",
+    #     tag_names         = ["itcustomapps", "prod"]
+    #     trigger_patterns  = ["TerraformCloud/Workspace"]
+    #     working_directory = "TerraformCloud/Workspace"
+    #     branch            = "master"
+    #     identifier        = "rtekoh/NewTerraformCloud"
+    #   }
+    # ],
     teams = [
       {
         name       = "tfc_itcustomapps_admin"

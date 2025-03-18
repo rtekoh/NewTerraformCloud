@@ -1,0 +1,359 @@
+{
+  "version": 4,
+  "terraform_version": "1.9.8",
+  "serial": 8,
+  "lineage": "143e6550-f65a-6453-53a3-b2ba4e075771",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "tfe_organization_membership",
+      "name": "org_members",
+      "provider": "provider[\"registry.terraform.io/hashicorp/tfe\"]",
+      "instances": [
+        {
+          "index_key": "rtekoh@gmail.com",
+          "schema_version": 0,
+          "attributes": {
+            "email": "rtekoh@gmail.com",
+            "id": "ou-xbzyE744geJPLtCZ",
+            "organization": "EffulgenceTech",
+            "user_id": "user-mH7Udbv5TYPRzgDp",
+            "username": ""
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "tfe_project.project"
+          ]
+        },
+        {
+          "index_key": "timi@effulgencetech.org",
+          "schema_version": 0,
+          "attributes": {
+            "email": "timi@effulgencetech.org",
+            "id": "ou-aqcmyEBSkS1ZLhUT",
+            "organization": "EffulgenceTech",
+            "user_id": "user-v91JZpgLwYmPF7jS",
+            "username": ""
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "tfe_project.project"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "tfe_project",
+      "name": "project",
+      "provider": "provider[\"registry.terraform.io/hashicorp/tfe\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "id": "prj-QVs5km4fmZefDrPs",
+            "name": "cloudengineering_project",
+            "organization": "EffulgenceTech"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "id": "prj-xL9tiGdvXRnDpkkE",
+            "name": "itcustomapps_project",
+            "organization": "EffulgenceTech"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "tfe_team",
+      "name": "team",
+      "provider": "provider[\"registry.terraform.io/hashicorp/tfe\"]",
+      "instances": [
+        {
+          "index_key": "tfc_cloud_admin",
+          "schema_version": 0,
+          "attributes": {
+            "id": "team-Xg2djDru79Z5MfpL",
+            "name": "tfc_cloud_admin",
+            "organization": "EffulgenceTech",
+            "organization_access": [
+              {
+                "manage_membership": true,
+                "manage_modules": false,
+                "manage_policies": false,
+                "manage_policy_overrides": false,
+                "manage_projects": false,
+                "manage_providers": false,
+                "manage_run_tasks": false,
+                "manage_vcs_settings": false,
+                "manage_workspaces": false,
+                "read_projects": true,
+                "read_workspaces": true
+              }
+            ],
+            "sso_team_id": "",
+            "visibility": "secret"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "tfe_project.project"
+          ]
+        },
+        {
+          "index_key": "tfc_itcustomapps_admin",
+          "schema_version": 0,
+          "attributes": {
+            "id": "team-t1Jz95iSTioKs4tA",
+            "name": "tfc_itcustomapps_admin",
+            "organization": "EffulgenceTech",
+            "organization_access": [
+              {
+                "manage_membership": false,
+                "manage_modules": false,
+                "manage_policies": false,
+                "manage_policy_overrides": false,
+                "manage_projects": false,
+                "manage_providers": false,
+                "manage_run_tasks": false,
+                "manage_vcs_settings": false,
+                "manage_workspaces": false,
+                "read_projects": false,
+                "read_workspaces": false
+              }
+            ],
+            "sso_team_id": "",
+            "visibility": "secret"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "tfe_project.project"
+          ]
+        },
+        {
+          "index_key": "tfc_itcustomapps_developer",
+          "schema_version": 0,
+          "attributes": {
+            "id": "team-RXctu5T8uj5r6StD",
+            "name": "tfc_itcustomapps_developer",
+            "organization": "EffulgenceTech",
+            "organization_access": [
+              {
+                "manage_membership": false,
+                "manage_modules": false,
+                "manage_policies": false,
+                "manage_policy_overrides": false,
+                "manage_projects": false,
+                "manage_providers": false,
+                "manage_run_tasks": false,
+                "manage_vcs_settings": false,
+                "manage_workspaces": false,
+                "read_projects": false,
+                "read_workspaces": false
+              }
+            ],
+            "sso_team_id": "",
+            "visibility": "secret"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "tfe_project.project"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "tfe_team_organization_member",
+      "name": "team_members",
+      "provider": "provider[\"registry.terraform.io/hashicorp/tfe\"]",
+      "instances": [
+        {
+          "index_key": "tfc_cloud_admin_rtekoh@gmail.com",
+          "schema_version": 0,
+          "attributes": {
+            "id": "team-Xg2djDru79Z5MfpL/ou-xbzyE744geJPLtCZ",
+            "organization_membership_id": "ou-xbzyE744geJPLtCZ",
+            "team_id": "team-Xg2djDru79Z5MfpL"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "tfe_organization_membership.org_members",
+            "tfe_project.project",
+            "tfe_team.team"
+          ]
+        },
+        {
+          "index_key": "tfc_itcustomapps_admin_timi@effulgencetech.org",
+          "schema_version": 0,
+          "attributes": {
+            "id": "team-t1Jz95iSTioKs4tA/ou-aqcmyEBSkS1ZLhUT",
+            "organization_membership_id": "ou-aqcmyEBSkS1ZLhUT",
+            "team_id": "team-t1Jz95iSTioKs4tA"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "tfe_organization_membership.org_members",
+            "tfe_project.project",
+            "tfe_team.team"
+          ]
+        },
+        {
+          "index_key": "tfc_itcustomapps_developer_timi@effulgencetech.org",
+          "schema_version": 0,
+          "attributes": {
+            "id": "team-RXctu5T8uj5r6StD/ou-aqcmyEBSkS1ZLhUT",
+            "organization_membership_id": "ou-aqcmyEBSkS1ZLhUT",
+            "team_id": "team-RXctu5T8uj5r6StD"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "tfe_organization_membership.org_members",
+            "tfe_project.project",
+            "tfe_team.team"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "tfe_team_project_access",
+      "name": "team_access",
+      "provider": "provider[\"registry.terraform.io/hashicorp/tfe\"]",
+      "instances": [
+        {
+          "index_key": "tfc_cloud_admin",
+          "schema_version": 1,
+          "attributes": {
+            "access": "custom",
+            "id": "tprj-sw3z1BYgrF6vAVgD",
+            "project_access": [
+              {
+                "settings": "delete",
+                "teams": "manage"
+              }
+            ],
+            "project_id": "prj-QVs5km4fmZefDrPs",
+            "team_id": "team-Xg2djDru79Z5MfpL",
+            "workspace_access": [
+              {
+                "create": true,
+                "delete": true,
+                "locking": true,
+                "move": true,
+                "run_tasks": true,
+                "runs": "apply",
+                "sentinel_mocks": "read",
+                "state_versions": "write",
+                "variables": "write"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "tfe_project.project",
+            "tfe_team.team"
+          ]
+        },
+        {
+          "index_key": "tfc_itcustomapps_admin",
+          "schema_version": 1,
+          "attributes": {
+            "access": "custom",
+            "id": "tprj-pQYri8wNfSjNgDHA",
+            "project_access": [
+              {
+                "settings": "delete",
+                "teams": "manage"
+              }
+            ],
+            "project_id": "prj-xL9tiGdvXRnDpkkE",
+            "team_id": "team-t1Jz95iSTioKs4tA",
+            "workspace_access": [
+              {
+                "create": true,
+                "delete": true,
+                "locking": true,
+                "move": true,
+                "run_tasks": true,
+                "runs": "apply",
+                "sentinel_mocks": "read",
+                "state_versions": "write",
+                "variables": "write"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "tfe_project.project",
+            "tfe_team.team"
+          ]
+        },
+        {
+          "index_key": "tfc_itcustomapps_developer",
+          "schema_version": 1,
+          "attributes": {
+            "access": "custom",
+            "id": "tprj-PY7pezxtJwZg9xLN",
+            "project_access": [
+              {
+                "settings": "update",
+                "teams": "read"
+              }
+            ],
+            "project_id": "prj-xL9tiGdvXRnDpkkE",
+            "team_id": "team-RXctu5T8uj5r6StD",
+            "workspace_access": [
+              {
+                "create": true,
+                "delete": true,
+                "locking": true,
+                "move": false,
+                "run_tasks": true,
+                "runs": "apply",
+                "sentinel_mocks": "read",
+                "state_versions": "write",
+                "variables": "write"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "tfe_project.project",
+            "tfe_team.team"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "tfe_workspace",
+      "name": "workspace",
+      "provider": "provider[\"registry.terraform.io/hashicorp/tfe\"]",
+      "instances": [
+      ]
+    }
+  ],
+  "check_results": null
+}
+

@@ -21,16 +21,16 @@ variable "projects" {
   description = "List of projects with their details, including associated teams and team members."
   type = list(object({
     name = string
-    workspaces = list(object({
-      name              = string
-      description       = string
-      tag_names         = list(string)
-      trigger_patterns  = list(string)
-      working_directory = string
-      branch            = string
-      identifier        = string
+    # workspaces = list(object({
+    #   name              = string
+    #   description       = string
+    #   tag_names         = list(string)
+    #   trigger_patterns  = list(string)
+    #   working_directory = string
+    #   branch            = string
+    #   identifier        = string
 
-    }))
+    # }))
     teams = list(object({
       name       = string
       visibility = string
